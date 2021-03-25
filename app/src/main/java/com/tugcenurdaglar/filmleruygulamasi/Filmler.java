@@ -1,57 +1,62 @@
+
 package com.tugcenurdaglar.filmleruygulamasi;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Filmler implements Serializable { //sayfalar arası veri transferlerinde kullanılacak nesneler olduğu için implements Serializable
-    private int film_id;
-    private String film_ad;
-    private int film_yil;
-    private String film_resim;
+public class Filmler implements Serializable {
+
+    @SerializedName("film_id")
+    @Expose
+    private String filmId;
+    @SerializedName("film_ad")
+    @Expose
+    private String filmAd;
+    @SerializedName("film_yil")
+    @Expose
+    private String filmYil;
+    @SerializedName("film_resim")
+    @Expose
+    private String filmResim;
+    @SerializedName("kategori")
+    @Expose
     private Kategoriler kategori;
-    private Yonetmenler yonetmen;
+    @SerializedName("yonetmen")
+    @Expose
+    private Yonetmen yonetmen;
 
-    public Filmler() {
+    public String getFilmId() {
+        return filmId;
     }
 
-    public Filmler(int film_id, String film_ad, int film_yil, String film_resim, Kategoriler kategori, Yonetmenler yonetmen) {
-        this.film_id = film_id;
-        this.film_ad = film_ad;
-        this.film_yil = film_yil;
-        this.film_resim = film_resim;
-        this.kategori = kategori;
-        this.yonetmen = yonetmen;
+    public void setFilmId(String filmId) {
+        this.filmId = filmId;
     }
 
-    public int getFilm_id() {
-        return film_id;
+    public String getFilmAd() {
+        return filmAd;
     }
 
-    public void setFilm_id(int film_id) {
-        this.film_id = film_id;
+    public void setFilmAd(String filmAd) {
+        this.filmAd = filmAd;
     }
 
-    public String getFilm_ad() {
-        return film_ad;
+    public String getFilmYil() {
+        return filmYil;
     }
 
-    public void setFilm_ad(String film_ad) {
-        this.film_ad = film_ad;
+    public void setFilmYil(String filmYil) {
+        this.filmYil = filmYil;
     }
 
-    public int getFilm_yil() {
-        return film_yil;
+    public String getFilmResim() {
+        return filmResim;
     }
 
-    public void setFilm_yil(int film_yil) {
-        this.film_yil = film_yil;
-    }
-
-    public String getFilm_resim() {
-        return film_resim;
-    }
-
-    public void setFilm_resim(String film_resim) {
-        this.film_resim = film_resim;
+    public void setFilmResim(String filmResim) {
+        this.filmResim = filmResim;
     }
 
     public Kategoriler getKategori() {
@@ -62,11 +67,12 @@ public class Filmler implements Serializable { //sayfalar arası veri transferle
         this.kategori = kategori;
     }
 
-    public Yonetmenler getYonetmen() {
+    public Yonetmen getYonetmen() {
         return yonetmen;
     }
 
-    public void setYonetmen(Yonetmenler yonetmen) {
+    public void setYonetmen(Yonetmen yonetmen) {
         this.yonetmen = yonetmen;
     }
+
 }

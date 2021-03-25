@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class DetayActivity extends AppCompatActivity {
     private ImageView imageViewResimDetay;
     private TextView textViewFilmAdDetay, textViewYilDetay, textViewYonetmenDetay;
@@ -24,12 +26,14 @@ public class DetayActivity extends AppCompatActivity {
 
         film = (Filmler) getIntent().getSerializableExtra("nesne");
 
-        textViewFilmAdDetay.setText(film.getFilm_ad());
-        textViewYilDetay.setText(String.valueOf(film.getFilm_yil()));
-        textViewYonetmenDetay.setText(film.getYonetmen().getYonetmen_ad());
+        textViewFilmAdDetay.setText(film.getFilmAd());
+        textViewYilDetay.setText(String.valueOf(film.getFilmYil()));
+        textViewYonetmenDetay.setText(film.getYonetmen().getYonetmenAd());
 
-        imageViewResimDetay.setImageResource(getResources().getIdentifier(film.getFilm_resim(),
-                "drawable",
-                getPackageName()));
+        String url = "http://kasimadalan.pe.hu/filmler/resimler/"+film.getFilmResim();
+
+        Picasso.get().load(url).resize(400,600).into(imageViewResimDetay);
+
+
     }
 }

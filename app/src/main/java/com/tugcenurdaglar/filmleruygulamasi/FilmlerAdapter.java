@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -41,10 +43,11 @@ public class FilmlerAdapter extends RecyclerView.Adapter<FilmlerAdapter.CardTasa
     public void onBindViewHolder(@NonNull CardTasarimTutucu holder, int position) {
         Filmler film = filmlerListe.get(position);
 
-        holder.textViewFilmAd.setText(film.getFilm_ad());
+        holder.textViewFilmAd.setText(film.getFilmAd());
 
-        holder.imageViewFilmResim.setImageResource(mContext.getResources().getIdentifier(film.getFilm_resim()
-                ,"drawable",mContext.getPackageName()));
+        String url = "http://kasimadalan.pe.hu/filmler/resimler/"+film.getFilmResim();
+
+        Picasso.get().load(url).into(holder.imageViewFilmResim);
 
         holder.film_card.setOnClickListener(new View.OnClickListener() {
             @Override

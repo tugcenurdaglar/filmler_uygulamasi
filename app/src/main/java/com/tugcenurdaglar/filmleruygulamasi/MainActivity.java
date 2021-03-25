@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.os.Bundle;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -17,7 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Kategoriler> kategorilerArrayList;
     private KategoriAdapter adapter;
 
-    private Veritabani vt;
+    private KategorilerDaoInterface kategorilerDaoInterface;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         kategoriRv = findViewById(R.id.kategoriRv);
 
-        veritabaniKopyala();//emulator açılır açılmaz çekilen veriler görülür
-
-        vt  =new Veritabani(this);
 
         toolbar.setTitle("Kategoriler");
         setSupportActionBar(toolbar);
@@ -37,23 +39,27 @@ public class MainActivity extends AppCompatActivity {
         kategoriRv.setHasFixedSize(true);
         kategoriRv.setLayoutManager(new LinearLayoutManager(this));
 
-        kategorilerArrayList = new KategoriDao().tumKategoriler(vt);
+        kategorilerDaoInterface = ApiUtils.getKategorilerDaoInterface();
 
-        adapter = new KategoriAdapter(this,kategorilerArrayList);
-        kategoriRv.setAdapter(adapter);
+        kategorilerDaoInterface.tumKategoriler().enqueue(new Callback<KategoriCevap>() {
+            @Override
+            public void onResponse(Call<KategoriCevap> call, Response<KategoriCevap> response) {
+                List<Kategoriler> kategoriler = response.body().getKategoriler();
+
+                adapter = new KategoriAdapter(MainActivity.this, kategoriler);
+
+                kategoriRv.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<KategoriCevap> call, Throwable t) {
+
+            }
+        });
+
+
 
     }
 
-    public void veritabaniKopyala(){ //verilerimizi çekmek için oluşturduk
-        DatabaseCopyHelper helper = new DatabaseCopyHelper(this);
-
-        try {
-            helper.createDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        helper.openDataBase();
-    }
 
 }

@@ -41,7 +41,7 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.CardTa
     public void onBindViewHolder(@NonNull CardTasarimTutucu holder, int position) {
         final Kategoriler kategori = kategorilerListe.get(position);
 
-        holder.textViewKategoriAd.setText(kategori.getKategori_ad());
+        holder.textViewKategoriAd.setText(kategori.getKategoriAd());
 
         holder.kategori_card.setOnClickListener(new View.OnClickListener() {
             @Override
