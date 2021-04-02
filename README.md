@@ -1,2 +1,2 @@
 # filmler_uygulamasi
-<img src="https://github.com/tugcenurdaglar/sozluk_uygulamasi/blob/master/sozlukuygulama.gif" width="170px">
+<img src="https://github.com/tugcenurdaglar/filmler_uygulamasi/blob/master/filmleruygulama.gif" width="170px">
